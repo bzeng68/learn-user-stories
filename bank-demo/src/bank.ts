@@ -82,6 +82,20 @@ class Bank {
         account.balance -= withdrawMoney;
         return withdrawMoney;
     }
+
+    /**
+     * This method returns the balance of the account with the given accountNumber
+     * @param {string} -- accountNumber The accountNumber of the account to check the balance of
+     * @returns {number} -- The balance of the account with the given accountNumber
+     */
+    public checkBalance(accountNumber: string): number {
+        const account = this.isAccountExists(accountNumber);
+        if (account == null) {
+            throw new Error('Account does not exist');
+        }
+
+        return account.balance;
+    }
 }
 
 export default Bank;

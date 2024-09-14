@@ -25,7 +25,7 @@ console.log('\nDeposit Money Tests');
 const depositMoneyBank = new Bank();
 const depositMoneyAcc = depositMoneyBank.createAccount('Jane Doe', 25, '123456');
 depositMoneyBank.depositMoney(100, '123456');
-if (depositMoneyAcc.balance == 100) {
+if (depositMoneyAcc.balance === 100) {
     console.log('Scenario 1: Successful Deposit into Existing Account passed');
 } else {
     console.log('Scenario 1: Successful Deposit into Existing Account failed');
@@ -54,7 +54,7 @@ const withdrawMoneyBank = new Bank();
 const withdrawMoneyAcc = withdrawMoneyBank.createAccount('Jane Doe', 25, '123456');
 withdrawMoneyBank.depositMoney(100, '123456');
 withdrawMoneyBank.withdrawMoney(75, '123456');
-if (withdrawMoneyAcc.balance == 25) {
+if (withdrawMoneyAcc.balance === 25) {
     console.log('Scenario 1: Successful Deposit into Existing Account passed');
 } else {
     console.log('Scenario 1: Successful Deposit into Existing Account failed');
@@ -82,4 +82,25 @@ try {
     console.log('Scenario 4: Failed Withdrawal from an Existing Account with Invalid Withdrawal Amount failed');
 } catch (e) {
     console.log('Scenario 4: Failed Withdrawal from an Existing Account with Invalid Withdrawal Amount passed');
+}
+
+// #4 Check Balance
+console.log('\nCheck Balance Tests');
+// Scenario 1: Successful Balance Check of an Existing Account
+const checkBalanceBank = new Bank();
+const checkBalanceAcc = checkBalanceBank.createAccount('Jane Doe', 25, '123456');
+checkBalanceBank.depositMoney(100, '123456');
+const balance = checkBalanceBank.checkBalance('123456');
+if (balance === 100) {
+    console.log('Scenario 1: Successful Balance Check of an Existing Account passed');
+} else {
+    console.log('Scenario 1: Successful Balance Check of an Existing Account failed');
+}
+
+// Scenario 2: Failed Balance Check of a Non-Existant Account
+try {
+    checkBalanceBank.checkBalance('234567');
+    console.log('Scenario 2: Failed Balance Check of a Non-Existant Account failed');
+} catch (e) {
+    console.log('Scenario 2: Failed Balance Check of a Non-Existant Account passed');
 }
