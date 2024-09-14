@@ -1,4 +1,4 @@
-// THis is a type for all bank accounts in the bank
+// This is a type for all bank accounts in the bank
 interface BankAccount {
     name: string;
     age: number;
@@ -37,6 +37,26 @@ class Bank {
         const newAccount: BankAccount = { name, age, accountNumber, balance: 0 };
         this.accounts.push(newAccount);
         return newAccount;
+    }
+
+    /**
+     * This method deposits an amount of money into the account with the given accountNumber
+     * @param {number} -- depositAmount The amount of money to be deposited into the balance of the account with the inputted account number
+     * @param {string} -- accountNumber The accountNumber of the account to deposit money into
+     * @returns {number} -- The amount deposited into the account
+     */
+    public depositMoney(depositAmount: number, accountNumber: string): number {
+        const account = this.isAccountExists(accountNumber);
+        if (account == null) {
+            throw new Error('Account does not exist');
+        }
+
+        if (depositAmount < 0) {
+            throw new Error('Deposit amount cannot be less than 0');
+        }
+
+        account.balance += depositAmount;
+        return depositAmount;
     }
 }
 
