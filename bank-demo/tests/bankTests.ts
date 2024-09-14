@@ -46,3 +46,40 @@ try {
 } catch (e) {
     console.log('Scenario 2: Failed Deposit into Non-Existing Account passed');
 }
+
+// #3 Withdraw Money
+console.log('\nWithdraw Money Tests');
+// Scenario 1: Successful Withdrawal from an Existing Account with Sufficient Balance
+const withdrawMoneyBank = new Bank();
+const withdrawMoneyAcc = withdrawMoneyBank.createAccount('Jane Doe', 25, '123456');
+withdrawMoneyBank.depositMoney(100, '123456');
+withdrawMoneyBank.withdrawMoney(75, '123456');
+if (withdrawMoneyAcc.balance == 25) {
+    console.log('Scenario 1: Successful Deposit into Existing Account passed');
+} else {
+    console.log('Scenario 1: Successful Deposit into Existing Account failed');
+}
+
+// Scenario 2: Failed Withdrawal from an Existing Account with Insufficient Balance
+try {
+    withdrawMoneyBank.withdrawMoney(50, '123456');
+    console.log('Scenario 2: Failed Withdrawal from an Existing Account with Insufficient Balance failed');
+} catch (e) {
+    console.log('Scenario 2: Failed Withdrawal from an Existing Account with Insufficient Balance passed');
+}
+
+// Scenario 3: Failed Withdrawal from a Non-Existant Account
+try {
+    withdrawMoneyBank.withdrawMoney(50, '234567');
+    console.log('Scenario 3: Failed Withdrawal from a Non-Existant Account failed');
+} catch (e) {
+    console.log('Scenario 3: Failed Withdrawal from a Non-Existant Account passed');
+}
+
+// Scenario 4: Failed Withdrawal from an Existing Account with Invalid Withdrawal Amount
+try {
+    withdrawMoneyBank.withdrawMoney(-50, '123456');
+    console.log('Scenario 4: Failed Withdrawal from an Existing Account with Invalid Withdrawal Amount failed');
+} catch (e) {
+    console.log('Scenario 4: Failed Withdrawal from an Existing Account with Invalid Withdrawal Amount passed');
+}

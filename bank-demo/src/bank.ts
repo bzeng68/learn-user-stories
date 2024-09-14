@@ -58,6 +58,30 @@ class Bank {
         account.balance += depositAmount;
         return depositAmount;
     }
+
+    /**
+     * This method withdraws an amount of money from the account with the given accountNumber
+     * @param {number} -- depositAmount The amount of money to be withdrawn from the balance of the account with the inputted account number
+     * @param {string} -- accountNumber The accountNumber of the account to withdraw money from
+     * @returns {number} -- The amount withdrawn from the account
+     */
+    public withdrawMoney(withdrawMoney: number, accountNumber: string): number {
+        const account = this.isAccountExists(accountNumber);
+        if (account == null) {
+            throw new Error('Account does not exist');
+        }
+
+        if (withdrawMoney < 0) {
+            throw new Error('Withdraw amount cannot be less than 0');
+        }
+
+        if (account.balance - withdrawMoney < 0) {
+            throw new Error(`Account has insufficient balance to withdraw ${withdrawMoney}`);
+        }
+
+        account.balance -= withdrawMoney;
+        return withdrawMoney;
+    }
 }
 
 export default Bank;
